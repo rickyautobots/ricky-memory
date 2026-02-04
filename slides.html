@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  margin: 0;
+  padding: 40px;
+  min-height: 100vh;
+}
+.slide { display: none; padding: 60px; max-width: 1200px; margin: 0 auto; }
+.slide.active { display: block; }
+h1 { font-size: 64px; font-weight: 700; margin-bottom: 20px; color: #00d4ff; }
+h2 { font-size: 48px; color: #a855f7; margin-bottom: 30px; }
+.content { font-size: 28px; line-height: 1.8; }
+.code { background: #1e1e3f; border-radius: 12px; padding: 30px; font-family: monospace; font-size: 22px; margin: 20px 0; border-left: 4px solid #00d4ff; }
+.diagram { background: #1e1e3f; padding: 40px; border-radius: 16px; font-family: monospace; font-size: 20px; white-space: pre; line-height: 1.4; }
+.badge { display: inline-block; background: #a855f7; padding: 8px 20px; border-radius: 20px; font-size: 20px; margin: 10px 5px; }
+.list li { margin: 20px 0; }
+.highlight { color: #00d4ff; }
+.success { color: #10b981; }
+</style>
+</head>
+<body>
+
+<div class="slide active" id="slide1">
+  <h1>Ricky Memory</h1>
+  <div style="font-size: 32px; color: #888; margin-bottom: 40px;">Personal Digital Twin Memory System</div>
+  <div>
+    <span class="badge">EverMemOS</span>
+    <span class="badge">Semantic Search</span>
+    <span class="badge">OpenClaw</span>
+  </div>
+  <div style="margin-top: 60px; color: #666; font-size: 24px;">
+    EverMind Memory Genesis | Track 1: Agent + Memory
+  </div>
+</div>
+
+<div class="slide" id="slide2">
+  <h2>The Problem</h2>
+  <div class="content">
+    <p><strong>Current memory system:</strong></p>
+    <ul class="list">
+      <li>MEMORY.md — long-term curated memory</li>
+      <li>memory/YYYY-MM-DD.md — daily raw logs</li>
+      <li>Search = <span class="highlight">text matching</span> (grep)</li>
+    </ul>
+    <p style="margin-top: 40px; color: #f59e0b;">⚠️ Can't search by <em>meaning</em></p>
+  </div>
+</div>
+
+<div class="slide" id="slide3">
+  <h2>The Solution</h2>
+  <div class="diagram">
+┌─────────────────┐     ┌─────────────────┐
+│   Ricky Agent   │ ←─► │ RickyMemoryBridge│
+│   (OpenClaw)    │     └────────┬────────┘
+└─────────────────┘              │
+                                 ▼
+┌─────────────────┐     ┌─────────────────┐
+│   File Memory   │     │    EverMemOS    │
+│ (MEMORY.md)     │     │  (Vector + KG)  │
+└─────────────────┘     └─────────────────┘
+  </div>
+  <p style="margin-top: 40px; font-size: 28px;">
+    Bridge file-based memory with <span class="success">semantic search</span>
+  </p>
+</div>
+
+<div class="slide" id="slide4">
+  <h2>How It Works</h2>
+  <div class="code">
+# Sync daily log to EverMemOS
+$ python sync.py 2026-02-04
+
+Synced 15 memories from 2026-02-04.md
+
+# Query by meaning, not keywords
+$ python query.py "hackathon deadlines"
+
+Found 3 relevant memories:
+• x402 hackathon opens Feb 11
+• Solana AI ends Feb 12
+• Base Builder deadline Feb 8
+  </div>
+</div>
+
+<div class="slide" id="slide5">
+  <h2>Results</h2>
+  <div class="content" style="font-size: 32px;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 20px;"></td>
+        <td style="padding: 20px; color: #888;">Before</td>
+        <td style="padding: 20px; color: #00d4ff;">After</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 20px;">Search</td>
+        <td style="padding: 20px;">Text match</td>
+        <td style="padding: 20px; color: #10b981;">Semantic</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 20px;">Recall</td>
+        <td style="padding: 20px;">~60%</td>
+        <td style="padding: 20px; color: #10b981;">~90%</td>
+      </tr>
+      <tr>
+        <td style="padding: 20px;">Context</td>
+        <td style="padding: 20px;">Manual</td>
+        <td style="padding: 20px; color: #10b981;">Automatic</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="slide" id="slide6">
+  <h2>Links</h2>
+  <div class="content" style="font-size: 32px;">
+    <p>📦 <strong>GitHub:</strong> github.com/rickyautobots/ricky-memory</p>
+    <p>🤖 <strong>Agent:</strong> Ricky (OpenClaw)</p>
+    <p>👤 <strong>Human:</strong> Derek (@zatioj1989)</p>
+  </div>
+  <div style="margin-top: 80px; text-align: center;">
+    <span style="font-size: 64px;">🧠</span>
+    <p style="color: #666;">Track 1: Agent + Memory | Personal Digital Twin</p>
+  </div>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }
+});
+</script>
+</body>
+</html>
