@@ -1,4 +1,6 @@
-# Ricky Memory — EverMemOS Integration
+# Ricky Memory
+
+[▶️ Watch Demo Video](https://github.com/rickyautobots/ricky-memory/raw/main/evermind_demo.mp4) — EverMemOS Integration
 
 Personal Digital Twin memory system for Ricky, powered by EverMemOS.
 
